@@ -14,6 +14,15 @@ public class ComprasProductos {
     private Double total;
     private Boolean estado;
 
+    //Saber todos los productos que hay en una compra
+    @ManyToOne
+    @JoinColumn(name = "id_compra",  insertable = false, updatable = false)
+    private Compra compra;
+    //Saber todos las compras que hay en un producto
+    @ManyToOne
+    @JoinColumn(name = "id_producto",  insertable = false, updatable = false)
+    private Producto producto;
+
 
     public CompraProductoPK getId() {
         return id;
