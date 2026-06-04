@@ -9,7 +9,7 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_producto")
-    private int idProdcuto;
+    private int idProducto;
 
 
     private String nombre;
@@ -35,12 +35,20 @@ public class Producto {
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
     private Categorias categoria;
 
-    public int getIdProdcuto() {
-        return idProdcuto;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setIdProdcuto(int idProdcuto) {
-        this.idProdcuto = idProdcuto;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public String getNombre() {
@@ -89,5 +97,13 @@ public class Producto {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public Categorias getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categorias categoria) {
+        this.categoria = categoria;
     }
 }
