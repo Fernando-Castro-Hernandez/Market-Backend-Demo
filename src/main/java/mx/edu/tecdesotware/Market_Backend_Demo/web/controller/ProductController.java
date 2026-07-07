@@ -1,13 +1,58 @@
 package mx.edu.tecdesotware.Market_Backend_Demo.web.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import mx.edu.tecdesotware.Market_Backend_Demo.domain.Product;
+import mx.edu.tecdesotware.Market_Backend_Demo.domain.repository.ProductRepository;
+import mx.edu.tecdesotware.Market_Backend_Demo.domain.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
-public class ProductController {
 
-    
+
+public class ProductController {
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @GetMapping("")
+    public ResponseEntity<List<Product>> getAll(){
+        return new ResponseEntity<>(productService.getAll(),  HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable int productoId){
+        return productService.getProduct(productoId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/category/category{id}")
+    public ResponseEntity<List<Product>> getProductByCategory(@PathVariable int categoryId){
+        return productService.getByCategory(categoryId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product){
+        return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@RequestBody int productId){
+        if (productService.delete(productId))
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
 
