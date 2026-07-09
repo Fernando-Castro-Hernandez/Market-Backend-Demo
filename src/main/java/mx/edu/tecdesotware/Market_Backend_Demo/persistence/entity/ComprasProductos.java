@@ -3,20 +3,22 @@ package mx.edu.tecdesotware.Market_Backend_Demo.persistence.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "compras_productos")
 
 public class ComprasProductos {
 
     @EmbeddedId
-    private CompraProductoPK id;
+    private CompraProductoPK id = new CompraProductoPK();
 
     private Integer cantidad;
     private Double total;
     private Boolean estado;
 
-    //Saber todos los productos que hay en una compra
+    //Saber todos los productos que hay en una compra.
+    // @MapsId: el id_compra de la PK se deriva de esta compra (generada en cascada).
     @ManyToOne
-    @JoinColumn(name = "id_compra",  insertable = false, updatable = false)
+    @MapsId("idCompra")
+    @JoinColumn(name = "id_compra")
     private Compra compra;
     //Saber todos las compras que hay en un producto
     @ManyToOne

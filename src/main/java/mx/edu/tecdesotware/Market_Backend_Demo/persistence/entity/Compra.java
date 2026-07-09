@@ -36,8 +36,7 @@ public class Compra {
     private Cliente cliente;
 
     // Una compra tiene muchos productos. Se mappea a partir de la union que se hizo en ComprasProductos
-    @OneToMany(mappedBy = "compra")
-    @JoinColumn(name = "compras_productos")
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
     private List<ComprasProductos> comprasProductos;
 
     public int getIdCompra() {
