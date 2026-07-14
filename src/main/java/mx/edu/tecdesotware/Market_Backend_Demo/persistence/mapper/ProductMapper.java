@@ -17,6 +17,7 @@ public interface ProductMapper {
     @Mappings({
             @Mapping(source = "idProducto", target = "productId"),
             @Mapping(source = "nombre", target = "name"),
+            @Mapping(source = "idCategoria", target = "categoryId"),
             @Mapping(source = "precioVentas", target = "price"),
             @Mapping(source = "cantidadStock", target = "stock"),
             @Mapping(source = "estado", target = "active"),
@@ -27,6 +28,7 @@ public interface ProductMapper {
 
     @InheritInverseConfiguration
     @Mapping(target = "codigoBarras", ignore = true)
+    @Mapping(target = "categoria", ignore = true)   // asociación de solo lectura → la FK se escribe vía idCategoria
     Producto toProducto(Product product);
 
 
