@@ -17,6 +17,9 @@ application-local.yml
 application-local.properties
 *.properties
 
+# Archivos Claude
+CLAUDE.md
+
 ### STS ###
 .apt_generated
 .classpath
